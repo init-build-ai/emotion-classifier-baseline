@@ -1,4 +1,3 @@
-import PIL
 import torch
 import torch.nn.functional as F
 from torchvision import transforms
@@ -25,9 +24,7 @@ class Inference:
         ort_outs = self.ort_session.run(None, ort_inputs)
         sm = torch.tensor(ort_outs)
         sm = sm.reshape(7,-1)
-        print("output", sm, sm.shape)
+        #print("output", sm, sm.shape)
         ort_outs = F.softmax(sm, dim=0)
-        print("RESULTS", ort_outs)
+        #print("RESULTS", ort_outs)
         return ort_outs
-
-        #return F.softmax(self.model(img_transform))
